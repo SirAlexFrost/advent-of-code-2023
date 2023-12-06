@@ -1,0 +1,22 @@
+{
+  "name": "aoc-2023",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "one": "nodemon ./days/one",
+    "two": "nodemon ./days/two",
+    "three": "nodemon ./days/three",
+    "four": "nodemon ./days/four",
+    "five": "nodemon ./days/five",
+    "six": "ts-node-dev --respawn ./days/six"
+  },
+  "author": "SirAlexFrost",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "ts-node-dev": "^2.0.0"
+  },
+  "dependencies": {
+    "typescript": "^5.3.2"
+  }
+}
