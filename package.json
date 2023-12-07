@@ -8,7 +8,8 @@
     "three": "nodemon ./days/three",
     "four": "nodemon ./days/four",
     "five": "nodemon ./days/five",
-    "six": "ts-node-dev --respawn ./days/six"
+    "six": "ts-node-dev --respawn ./days/six",
+    "seven": "ts-node-dev --respawn ./days/seven"
   },
   "author": "SirAlexFrost",
   "license": "MIT",
