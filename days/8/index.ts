@@ -75,7 +75,7 @@ const travelFrom = async (from: string) => {
 
     Sorry, I absolutely cheated here.
     I would not have thought of LCM on my own,
-     even though once you know,
+    even though once you know,
     its super obvious!
 
 */
@@ -92,7 +92,6 @@ const part2 = async () => {
         runs.push(travelFrom(node));
     });
 
-    let sum = 0;
     for (const run of runs) {
         steps.push(await run);
     }
