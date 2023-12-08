@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "one": "nodemon ./days/one",
-    "two": "nodemon ./days/two",
-    "three": "nodemon ./days/three",
-    "four": "nodemon ./days/four",
-    "five": "nodemon ./days/five",
-    "six": "ts-node-dev --respawn ./days/six",
-    "seven": "ts-node-dev --respawn ./days/seven"
+    "1": "nodemon ./days/1",
+    "2": "nodemon ./days/2",
+    "3": "nodemon ./days/3",
+    "4": "nodemon ./days/4",
+    "5": "nodemon ./days/5",
+    "6": "ts-node-dev --respawn ./days/6",
+    "7": "ts-node-dev --respawn ./days/7",
+    "8": "ts-node-dev --respawn ./days/8"
   },
   "author": "SirAlexFrost",
   "license": "MIT",
