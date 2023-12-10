@@ -1,6 +1,6 @@
 import { test, input } from './day-10-input';
 
-const lines = test.split('\n');
+const lines = input.split('\n');
 
 const width = lines[0].length;
 
@@ -132,3 +132,28 @@ const part1 = loop.reduce((highest, curr) => {
 }, 0)
 
 console.log('P1 Result:', part1);
+
+const isInLoop: (x: number, y: number) => boolean = (x: number, y: number) => {
+    return loop.filter(coord => coord.x === x && coord.y === y).length > 0;
+};
+
+const part2 = lines.map((line, y) => {
+
+    let inside = false;
+
+    const positions: boolean[] = [];
+
+    for (let x = 0; x < line.length; x++) {
+        const coord: Coord = { x, y, type: line[x] };
+
+        if (isInLoop(coord.x, coord.y)) {
+            if ('JL|'.includes(coord.type)) inside = !inside;
+        } else {
+            positions.push(inside);
+        }
+    }
+
+    return positions;
+}).reduce((sum, curr) => sum += curr.filter(val => val === true).length, 0);
+
+console.log('P2 Result:', part2);
