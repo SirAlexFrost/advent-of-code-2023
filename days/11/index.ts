@@ -20,42 +20,50 @@ type Galaxy = {
 
 const galaxies: Galaxy[] = [];
 
+const emptyRows: boolean[] = [];
+const emptyColumns: boolean[] = [];
+
 lines.forEach((line, y) => {
+    let isEmpty = true;
     for (let x = 0; x < line.length; x++) {
         const char = line[x];
         if (char !== '#') continue;
         galaxies.push({ id: galaxies.length + 1, x, y });
+        isEmpty = false;
     }
+    emptyRows.push(isEmpty);
 });
 
+for (let x = 0; x < lines[0].length; x++) {
+    const isEmpty = lines.filter(line => line[x] === '#').length === 0
+    emptyColumns.push(isEmpty);
+}
+
+const getExpansionsX = (arr: number[]) => {
+    return arr.map(i => emptyColumns[i]).filter(val => val === true).length;
+}
+
+const getExpansionsY = (arr: number[]) => {
+    return arr.map(i => emptyRows[i]).filter(val => val === true).length;
+}
+
 const distance = (galaxy: Galaxy, otherGalaxy: Galaxy, scale: number) => {
+    const dX = Math.abs(otherGalaxy.x - galaxy.x);
+    const dY = Math.abs(otherGalaxy.y - galaxy.y);
 
-    let lowerX = galaxy.x < otherGalaxy.x;
-    let lowerY = galaxy.y < otherGalaxy.y;
+    const lowerX = galaxy.x < otherGalaxy.x;
+    const lowerY = galaxy.y < otherGalaxy.y;
 
-    let dx = 0;
-    let dy = 0;
+    const xSpan: number[] = Array(dX).fill(0).map((_, i) => ((lowerX ? galaxy.x : otherGalaxy.x) + 1) + i);
+    xSpan.pop();
 
-    let xExpands = 0;
-    let yExpands = 0;
+    const ySpan: number[] = Array(dY).fill(0).map((_, i) => ((lowerY ? galaxy.y : otherGalaxy.y) + 1) + i);
+    ySpan.pop();
 
-    for (let x = (lowerX ? galaxy.x : otherGalaxy.x); x < (lowerX ? otherGalaxy.x : galaxy.x); x++) {
-        const hasGalaxy = findGalaxyInX(x);
-        dx++;
-        if (hasGalaxy) continue;
-        xExpands++;
-        dx--;
-    }
+    const expansionsX = getExpansionsX(xSpan);
+    const expansionsY = getExpansionsY(ySpan);
 
-    for (let y = (lowerY ? galaxy.y : otherGalaxy.y); y < (lowerY ? otherGalaxy.y : galaxy.y); y++) {
-        const hasGalaxy = findGalaxyInY(y);
-        dy++;
-        if (hasGalaxy) continue;
-        yExpands++;
-        dy--;
-    }
-
-    return dx + dy + (scale * xExpands) + (scale * yExpands);
+    return (dX - expansionsX) + (dY - expansionsY) + (expansionsX * scale) + (expansionsY * scale);
 };
 
 const getDistances = (scale: number) => {
