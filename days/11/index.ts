@@ -51,14 +51,11 @@ const distance = (galaxy: Galaxy, otherGalaxy: Galaxy, scale: number) => {
     const dX = Math.abs(otherGalaxy.x - galaxy.x);
     const dY = Math.abs(otherGalaxy.y - galaxy.y);
 
-    const lowerX = galaxy.x < otherGalaxy.x;
-    const lowerY = galaxy.y < otherGalaxy.y;
+    const xSpan: number[] = [];
+    for (let i = 0; i < dX; i++) { xSpan.push((Math.min(galaxy.x, otherGalaxy.x) + 1) + i) }
 
-    const xSpan: number[] = Array(dX).fill(0).map((_, i) => ((lowerX ? galaxy.x : otherGalaxy.x) + 1) + i);
-    xSpan.pop();
-
-    const ySpan: number[] = Array(dY).fill(0).map((_, i) => ((lowerY ? galaxy.y : otherGalaxy.y) + 1) + i);
-    ySpan.pop();
+    const ySpan: number[] = [];
+    for (let i = 0; i < dY; i++) { ySpan.push((Math.min(galaxy.y, otherGalaxy.y) + 1) + i) }
 
     const expansionsX = getExpansionsX(xSpan);
     const expansionsY = getExpansionsY(ySpan);
